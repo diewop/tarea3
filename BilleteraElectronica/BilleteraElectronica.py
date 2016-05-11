@@ -3,6 +3,7 @@ Created on 10/05/2016
 
 @author: PedrozaSalerno
 '''
+from datetime import datetime
 
 class Persona():
     
@@ -32,3 +33,20 @@ class Persona():
         self.apellido = apellido
         self.ci = ci
         self.pin = pin
+        
+class Registro():
+    
+    def __init__(self,monto,fecha,identificador):
+        try:
+            self.monto = float(monto)
+            assert(self.monto>0)
+        except:
+            exit("El monto no es válidentificadoro, debe ser un número mayor que cero")
+    
+        if(type(fecha) is not datetime):
+            exit("La fecha debe ser del tipo datetime")
+        
+        self.fecha=fecha
+        self.identificador=identificador
+    
+     
