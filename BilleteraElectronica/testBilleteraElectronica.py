@@ -120,17 +120,17 @@ class PruebaBilletera(unittest.TestCase):
     
     def testBilleteraValida(self):
         p=Persona("Mauricio","Salerno","V-2499077",1212)
-        x = Billetera(p)
+        x = Billetera(12,p)
         self.assertTrue((type(x) is  Billetera), "Es una billetera")
     
     def testNoEsPersona(self):
         p="Hola Mundo"
         with self.assertRaises(SystemExit):
-            Billetera(p)
+            Billetera(12,p)
     
     def testConsumoSinSaldo(self):
         p=Persona("Mauricio","Salerno","V-2499077",1212)
-        x = Billetera(p)
+        x = Billetera(12,p)
         fecha = datetime(2012,6,30)
         r = Registro(128,fecha,789)
         self.assertEqual(x.consumir(r), "No tiene suficiente saldo", "Consumo sin saldo")
@@ -138,25 +138,34 @@ class PruebaBilletera(unittest.TestCase):
     
     def testConsumoConAlgoQueNoEsRegistro(self):
         p=Persona("Mauricio","Salerno","V-2499077",1212)
-        x = Billetera(p)
+        x = Billetera(12,p)
         fecha = datetime(2012,6,30)
         r = "Registro(128,fech,789)"
         self.assertEqual(x.consumir(r), "No es un registro", "Consumo entrada invalida")
     
     def testRecargaConAlgoQueNoEsRegistro(self):
         p=Persona("Mauricio","Salerno","V-2499077",1212)
-        x = Billetera(p)
+        x = Billetera(12,p)
         fecha = datetime(2012,6,30)
         r = "Registro(128,fech,789)"
-        self.assertEqual(x.recarga(r), "No es un registro", "Registro entrada invalida")
+        self.assertEqual(x.recargar(r), "No es un registro", "Registro entrada invalida")
     
     def testRecargaValidaYConsumoValido(self):
         p=Persona("Mauricio","Salerno","V-2499077",1212)
-        x = Billetera(p)
+        x = Billetera(12,p)
         fecha = datetime(2012,6,30)
         r = Registro(128,fecha,789)
         self.assertEqual(x.recargar(r), "Recarga realizada", "Recarga Valida")
-        self.assertEqual(x.consumir(r), "Consumo Realizado", "Consumo Valida")
+        self.assertEqual(x.consumir(r), "Consumo realizado", "Consumo Valida")
+        
+    def testBalance(self):
+        p=Persona("Mauricio","Salerno","V-2499077",1212)
+        x = Billetera(12,p)
+        fecha = datetime(2012,6,30)
+        r = Registro(128,fecha,789)
+        x.recargar(r)
+        self.assertEqual(x.saldo(), x.balance, "Saldo correcto")
+        
         
         
         
