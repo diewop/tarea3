@@ -48,5 +48,44 @@ class Registro():
         
         self.fecha=fecha
         self.identificador=identificador
+
+
+class Billetera():
+    def __init__(self,identificador,dueño):
+        if(type(dueño) is not Persona):
+            exit("El dueño no es del tipo Persona")
+            
+        self.dueño=dueño
+        self.recargas=[]
+        self.consumos=[]
+        self.balance=0
+        self.identificador=identificador
     
-     
+    def saldo(self):
+        return self.balance
+    
+    def consumir(self,registro):
+        if(type(registro) is not Registro):
+            print("No es un registro")
+            return "No es un registro"
+        else:
+            if(self.saldo()>=registro.monto):
+                self.consumos.append(registro)
+                self.balance -= registro.monto
+                print("Consumo realizado")
+                return "Consumo realizado"
+            else:
+                print("No tiene suficiente saldo")
+                return "No tiene suficiente saldo"
+    
+    def recargar(self,registro):
+        if(type(registro) is not Registro):
+            print("No es un registro")
+            return "No es un registro"
+        else:
+            self.recargas.append(registro)
+            self.balance += registro.monto
+            print("Recarga realizada")
+            return "Recarga realizada"
+            
+                
