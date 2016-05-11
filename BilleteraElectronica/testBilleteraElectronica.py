@@ -8,7 +8,7 @@ from IN import INT_MAX
 import sys
 from datetime import datetime
 
-from BilleteraElectronica import Persona
+from BilleteraElectronica import *
 
 
 class PruebaPersona(unittest.TestCase):
@@ -86,9 +86,10 @@ class PruebaPersona(unittest.TestCase):
         self.assertEqual(x.pin, 0, "Pin Es cero")
         
 
-class PruebaRecarga(unittest.TestCase):
+
+class PruebaRegistro(unittest.TestCase):
     def testMontoNoEsNumero(self):
-        fecha = datetime('2012','6','30')
+        fecha = datetime(2012,6,30)
         with self.assertRaises(SystemExit):
             Registro("No es numero", fecha, 50)
             
@@ -97,17 +98,17 @@ class PruebaRecarga(unittest.TestCase):
             Registro(50.7, '2012-06-12', 23)
             
     def testMontoMaximoFloat(self):
-        fecha = datetime('2012','6','30')
+        fecha = datetime(2012,6,30)
         x = Registro(sys.float_info.max, fecha, 60)
         self.assertEqual(x.monto, sys.float_info.max, "El monto es el maximo flotante")
     
     def testMontoNegativo(self):
-        fecha = datetime('2012','6','30')
+        fecha = datetime(2012,6,30)
         with self.assertRaises(SystemExit):
             Registro(-0.77, fecha, 757)
             
     def testMontoEsCero(self):
-        fecha = datetime('2012','6','30')
+        fecha = datetime(2012,6,30)
         with self.assertRaises(SystemExit):
             Registro(0, fecha, 57)
     
