@@ -5,11 +5,13 @@ Created on 10/05/2016
 '''
 import unittest
 from IN import INT_MAX
+import sys
+from datetime import datetime
 
 from BilleteraElectronica import Persona
 
 
-class Prueba(unittest.TestCase):
+class PruebaPersona(unittest.TestCase):
 
 
     def testDatosValidos(self):
@@ -84,7 +86,38 @@ class Prueba(unittest.TestCase):
         self.assertEqual(x.pin, 0, "Pin Es cero")
         
 
-
+class PruebaRecarga(unittest.TestCase):
+    def testMontoNoEsNumero(self):
+        fecha = datetime('2012','6','30')
+        with self.assertRaises(SystemExit):
+            Registro("No es numero", fecha, 50)
+            
+    def testFechaNoEsDateTime(self):
+        with self.assertRaises(SystemExit):
+            Registro(50.7, '2012-06-12', 23)
+            
+    def testMontoMaximoFloat(self):
+        fecha = datetime('2012','6','30')
+        x = Registro(sys.float_info.max, fecha, 60)
+        self.assertEqual(x.monto, sys.float_info.max, "El monto es el maximo flotante")
+    
+    def testMontoNegativo(self):
+        fecha = datetime('2012','6','30')
+        with self.assertRaises(SystemExit):
+            Registro(-0.77, fecha, 757)
+            
+    def testMontoEsCero(self):
+        fecha = datetime('2012','6','30')
+        with self.assertRaises(SystemExit):
+            Registro(0, fecha, 57)
+    
+   
+    
+        
+        
+    
+    
+    
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
     unittest.main()
