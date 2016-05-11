@@ -11,9 +11,9 @@ class Persona(unittest.TestCase):
 
 
     def testDatosValidos(self):
-        X = Persona("Chu-li","Salerno","V-24900767",4679)
-        self.assertEqual(X.nombre, "Chu-li", "Nombre aceptado")
-        self.assertEqual(X.apellido, "Salerno", "Apellido aceptado")
+        X = Persona("Chu-li-ñon","López", "V-24900767",4679)
+        self.assertEqual(X.nombre, "Chu-li-ñon", "Nombre aceptado")
+        self.assertEqual(X.apellido, "López", "Apellido aceptado")
         self.assertEqual(X.ci, "V-24900767", "Cedula aceptada")
         self.assertEqual(X.pin, 4679, "PIN aceptado")
     
@@ -76,6 +76,10 @@ class Persona(unittest.TestCase):
     def testPINVacio(self):
         with self.assertRaises(SystemExit):
             Persona("Mauricio","Salerno","V-2499077",None)
+    
+    def testPINEsCero(self):
+        with self.assertRaises(SystemExit):
+            Persona("Mauricio","Salerno","V-2499077",0)
         
 
 
