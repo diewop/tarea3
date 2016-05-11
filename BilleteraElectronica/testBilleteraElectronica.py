@@ -6,8 +6,10 @@ Created on 10/05/2016
 import unittest
 from IN import INT_MAX
 
+from BilleteraElectronica import Persona
 
-class Persona(unittest.TestCase):
+
+class Prueba(unittest.TestCase):
 
 
     def testDatosValidos(self):
@@ -58,8 +60,8 @@ class Persona(unittest.TestCase):
             Persona("Mauricio","Salerno",None,4679) 
             
     def testPINEnteroMax(self):
-        with self.assertRaises(SystemExit):
-            Persona("Mauricio","Salerno","V-2499077",INT_MAX)
+        x=Persona("Mauricio","Salerno","V-2499077",INT_MAX)
+        self.assertEqual(x.pin, INT_MAX,"PIN Maximo entero")
     
     def testPINEnteroNegativo(self):
         with self.assertRaises(SystemExit):
@@ -78,8 +80,8 @@ class Persona(unittest.TestCase):
             Persona("Mauricio","Salerno","V-2499077",None)
     
     def testPINEsCero(self):
-        with self.assertRaises(SystemExit):
-            Persona("Mauricio","Salerno","V-2499077",0)
+        x=Persona("Mauricio","Salerno","V-2499077",0)
+        self.assertEqual(x.pin, 0, "Pin Es cero")
         
 
 
