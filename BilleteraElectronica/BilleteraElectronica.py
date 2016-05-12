@@ -53,7 +53,7 @@ class Registro():
         self.identificador=identificador
 
 
-class Billetera():
+class BilleteraElectronica():
     def __init__(self,identificador,dueño):
         if(type(dueño) is not Persona):
             exit("El dueño no es del tipo Persona")
