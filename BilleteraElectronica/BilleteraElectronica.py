@@ -8,15 +8,15 @@ from datetime import datetime
 class Persona():
     
     def __init__(self, nombre, apellido, ci, pin):
-        if(type(nombre) is not type("safsdf")):
+        if(type(nombre) is not str):
             exit("El nombre debe ser un string")
         elif(any(not(x.isalpha()) and x!="-" and  not(x.isspace()) for x in nombre)):
             exit("Caracteres invalidos en el nombre.")
-        elif(type(apellido) is not type("safsdf")):
+        elif(type(apellido) is not str):
             exit("El apellido debe ser un string")
         elif(any(not(x.isalpha()) and x!="-" and  not(x.isspace()) for x in apellido)):
             exit("Caracteres invalidos en el apellido.")
-        elif(type(ci) is not type("asd")):
+        elif(type(ci) is not str):
             exit("La cedula de identidad debe ser un string de la forma V-|E- seguida de numeros")
         elif(len(ci)<3):
             exit("La cedula de identidad debe ser un string de la forma V-|E- seguido de numeros")
@@ -24,16 +24,19 @@ class Persona():
             exit("La cedula de identidad debe ser un string de la forma V-|E- seguido de numeros")
         elif(any(not x.isdigit() for x in ci[2:])):
             exit("La cedula de identidad debe ser un string de la forma V-|E- seguido de numeros")
-        elif(type(pin) is not int):
+        elif(type(pin) is not str):
             exit("El pin debe ser un numero entero mayor o igual que cero")
-        elif(pin<0):
-            exit("El pin debe ser un numero entereo mayor o igual que cero")
+        elif(any(not x.isdigit() for x in pin)):
+            exit("El pin debe ser un numero entero mayor o igual que cero")
+        
+        
             
         self.nombre = nombre
         self.apellido = apellido
         self.ci = ci
         self.pin = pin
         
+
 class Registro():
     
     def __init__(self,monto,fecha,identificador):
@@ -88,4 +91,4 @@ class Billetera():
             print("Recarga realizada")
             return "Recarga realizada"
             
-                
+
