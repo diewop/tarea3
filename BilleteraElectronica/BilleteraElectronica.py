@@ -4,6 +4,7 @@ Created on 10/05/2016
 @author: PedrozaSalerno
 '''
 from datetime import datetime
+import sys
 
 class Persona():
     
@@ -28,8 +29,6 @@ class Persona():
             exit("El pin debe ser un numero entero mayor o igual que cero")
         elif(any(not x.isdigit() for x in pin)):
             exit("El pin debe ser un numero entero mayor o igual que cero")
-        
-        
             
         self.nombre = nombre
         self.apellido = apellido
@@ -86,6 +85,14 @@ class BilleteraElectronica():
             print("No es un registro")
             return "No es un registro"
         else:
+            if(self.saldo()>=sys.float_info.max):
+                print("No se puede recargar. Billetera llena")
+                return"No se puede recargar. Billetera llena"
+            elif(self.saldo() + registro.monto >= sys.float_info.max ):
+                if(self.saldo()>0):
+                    print("No se puede recargar. Billetera llena")
+                    return "No se puede recargar. Billetera llena"
+                    
             self.recargas.append(registro)
             self.balance += registro.monto
             print("Recarga realizada")
